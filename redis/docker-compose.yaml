@@ -1,0 +1,13 @@
+version: "3.2"
+services:
+  redis:
+    image: bitnami/redis:latest
+    container_name: redis
+    environment:
+      # - REDIS_PASSWORD=password
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - 6379:6397
+    volumes:
+      - /redis/data:/bitnami/redis/data
