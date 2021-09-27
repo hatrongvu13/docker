@@ -3,6 +3,7 @@ services:
   redis:
     image: bitnami/redis:latest
     container_name: redis
+    restart: always
     environment:
       # - REDIS_PASSWORD=password
       - ALLOW_EMPTY_PASSWORD=yes
