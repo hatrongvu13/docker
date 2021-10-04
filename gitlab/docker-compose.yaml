@@ -13,6 +13,6 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-    - ~/gitlab/data:/var/opt/gitlab
-    - ~/gitlab/config:/etc/gitlab
-    - ~/gitlab/logs:/var/log/gitlab
+    - /home/oem/gitlab/data:/var/opt/gitlab
+    - /home/oem/gitlab/config:/etc/gitlab
+    - /home/oem/gitlab/logs:/var/log/gitlab
