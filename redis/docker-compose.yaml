@@ -5,8 +5,8 @@ services:
     container_name: redis
     restart: always
     environment:
-      # - REDIS_PASSWORD=password
-      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PASSWORD=password
+      #- ALLOW_EMPTY_PASSWORD=yes
       - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
     ports:
       - 6379:6397
