@@ -1,0 +1,23 @@
+version: "3.2"
+services:
+  nginx:
+    image: "nginx"
+    container_name: "nginx"
+    restart: "unless-stopped"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "./data/templates:/etc/nginx/templates"
+      - "./data/web-root:/var/www/html"
+      - "./data/certbot-etc:/etc/letsencrypt"
+      - "./data/certbot-var:/var/lib/letsencrypt"
+#  certbot:
+#    image: "certbot/certbot"
+#    container_name: "certbot"
+#    restart: unless-stopped
+#    volumes:
+#      - "./data/certbot-etc:/etc/letsencrypt"
+#      - "./data/certbot-var:/var/lib/letsencrypt"
+#      - "./data/web-root:/var/www/html"
+#    command: certonly --webroot --webroot-path=/var/www/html --email hatrongvu13@gmail.com --agree-tos --no-eff-email -d vuha.jaxtony

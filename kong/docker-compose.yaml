@@ -1,0 +1,56 @@
+version: '3.7'
+
+services:
+  kong-database:
+    image: postgres:${POSTGRES_VERSION:-latest}
+    container_name: kong_db
+    environment:
+      POSTGRES_USER=${POSTGRES_USER:-root}
+      POSTGRES_DB=${POSTGRES_DB:-root}
+      POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-root}
+    volumes:
+      - ${DB_VOLUME:-./pgdata}:/var/lib/postgresql/data
+    restart: ${DB_RESTART:-always}
+    healthcheck:
+      test: ["CMD_SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  kong:
+    image: kong:${KONG_VERSION:-latest}
+    container_name: kong
+    restart: ${KONG_RESTART:-always}
+    environment:
+      TZ=${TZ:-Asia/Ho_Chi_Minh}
+      KONG_DATABASE=postgres
+      KONG_PG_HOST=${KONG_PG_HOST:-kong-database}
+      KONG_PG_DATABASE=${KONG_PG_DATABASE:-root}
+      KONG_PG_USER=${KONG_PG_USER:-root}
+      KONG_PG_PASSWORD=${KONG_PG_PASSWORD:-root}
+      KONG_ADMIN_LISTEN=${KONG_ADMIN_LISTEN:-0.0.0.0:8001}
+      KONG_PROXY_LISTEN=${KONG_PROXY_LISTEN:-0.0.0.0:8000, 0.0.0.0:8443 ssl http2}
+      KONG_NGINX_HTTP_RESOLVER=${KONG_NGINX_HTTP_RESOLVER:-8.8.8.8}
+      KONG_PROXY_ERROR_LOG=/dev/stderr
+      KONG_ADMIN_ERROR_LOG=/dev/stderr
+      KONG_TRUSTED_IPS=0.0.0.0/0,::/0
+      KONG_REAL_IP_RECURSIVE=on
+    ports:
+      - "8000:8000"
+      - "8443:8443"
+      - "8001:8001"
+    healthcheck:
+      test: ["CMD", "kong", "health"]
+      interval: 5s
+      timeout: 2s
+      retires: 5
+  konga:
+    image: pantsel/konga
+    container_name: konga
+    restart: ${KONGA_RESTART:-alwyas}
+    environment:
+      NODE_ENV:development
+    ports:
+      - "1337:1337"
+    volumes:
+      - "${KONGA_VOLUMES:-./kong_data}:/app/kongadata"
+    
