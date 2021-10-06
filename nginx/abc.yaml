@@ -1,14 +1,14 @@
 version: "3.2"
 services:
   nginx:
-    image: "nginx"
+    image: "nginx:alpine"
     container_name: "nginx"
     restart: "unless-stopped"
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - "./data/templates:/etc/nginx/templates"
+      - "./data/conf.d:/etc/nginx/conf.d"
       - "./data/web-root:/var/www/html"
       - "./data/certbot-etc:/etc/letsencrypt"
       - "./data/certbot-var:/var/lib/letsencrypt"
