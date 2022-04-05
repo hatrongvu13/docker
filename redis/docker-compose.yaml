@@ -9,6 +9,6 @@ services:
       #- ALLOW_EMPTY_PASSWORD=yes
       - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
     ports:
-      - 6379:6397
+      - 6379:6379
     volumes:
       - /redis/data:/bitnami/redis/data
