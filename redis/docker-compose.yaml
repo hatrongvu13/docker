@@ -1,14 +1,8 @@
-version: "3.2"
+version: '3.2'
 services:
   redis:
-    image: bitnami/redis:latest
-    container_name: redis
+    image: redis:latest
+    container_name: redis_cached
     restart: always
-    environment:
-      - REDIS_PASSWORD=password
-      #- ALLOW_EMPTY_PASSWORD=yes
-      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
     ports:
-      - 6379:6397
-    volumes:
-      - /redis/data:/bitnami/redis/data
+      - 6379:6379
