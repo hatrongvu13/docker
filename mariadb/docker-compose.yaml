@@ -1,0 +1,7 @@
+version: '3.2'
+services:
+  db:
+    image: mariadb
+    restart: always
+    environments:
+      MARIADB_ROOT_PASSWORD: root
