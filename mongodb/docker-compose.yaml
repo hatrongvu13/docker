@@ -8,6 +8,6 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
     volumes:
-     - /home/oem/data/mongodb:/data/db
+     - /home/jaxtony/data/mongodb:/data/db
     ports:
      - 27017:27017
