@@ -1,0 +1,10 @@
+services:
+  volumio:
+    image: jbonjean/volumio
+    container_name: volumio
+    ports:
+      - '3000:3000'
+    volumes:
+      - '/mnt/data/volumio/music:/var/lib/mpd/music/'
+      - '/mnt/data/volumio/data:/data'
+    restart: always

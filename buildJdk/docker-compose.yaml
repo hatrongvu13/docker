@@ -1,0 +1,4 @@
+services:
+  image:
+    build: ./
+    container_name: application
