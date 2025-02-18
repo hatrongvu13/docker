@@ -1,0 +1,5 @@
+services:
+  jenkins:
+    image: jenkins-java-maven-custom
+    restart: always
+    build: ./
