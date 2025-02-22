@@ -2,6 +2,7 @@
 redis
 https://github.com/bitnami/bitnami-docker-redis/blob/master/docker-compose-replicaset.yml
 
+* using existing network
 
 ``` dockerfile
 version: '3'
@@ -22,4 +23,17 @@ volumes:
 networks:
     exist_network:
         external: true
+```
+
+* Bind mounts volumes
+
+``` dockerfile
+version: '3'
+volumes:
+    data_volumes:
+        driver: local
+        driver_opts:
+            type: none
+            device: /home/user/data_volumes
+            o: bind
 ```
