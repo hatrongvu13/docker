@@ -1,5 +1,20 @@
 services:
   jenkins:
-    image: jenkins-java-maven-custom
     restart: always
     build: ./
+    ports:
+      - '8080:8080'
+      - '50000:50000'
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+    environment:
+      JENKINS_OPTS: --prefix=/jenkins
+volumes:
+  jenkins_home:
+    driver: local
+    driver_opts:
+      type: none
+      device: /mnt/data/jenkins_home
+      o: bind
